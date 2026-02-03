@@ -116,7 +116,7 @@ npm install
 npm run dev
 ```
 
-Default password: `admin123` (change this!)
+Default password: `Admin@0022` (change this!)
 
 See [dashboard/README.md](./dashboard/README.md) for configuration.
 
