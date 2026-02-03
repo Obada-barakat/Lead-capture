@@ -28,29 +28,6 @@ npm install
 
 ### Update Webhook URL
 
-**File:** `src/components/LeadCaptureForm.jsx`
-
-Find this line (around line 55):
-```javascript
-const response = await fetch('http://localhost:5678/webhook/lead-capture', {
-```
-
-Replace with your n8n webhook URL:
-```javascript
-const response = await fetch('https://your-n8n-instance.com/webhook/lead-capture', {
-```
-
-### For Production
-
-When deploying, update to your production n8n URL:
-- Development: `http://localhost:5678/webhook/lead-capture`
-- Production: `https://n8n.yourdomain.com/webhook/lead-capture`
-
-
-## 🔧 Configuration
-
-### Update Webhook URL
-
 In `src/components/LeadCaptureForm.jsx`, update:
 ```javascript
 const response = await fetch('YOUR_N8N_WEBHOOK_URL', {
