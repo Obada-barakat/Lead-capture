@@ -125,16 +125,12 @@ See [dashboard/README.md](./dashboard/README.md) for configuration.
 ## 🎨 Screenshots
 
 ### Lead Capture Form
-![Lead Form Screenshot](./docs/screenshots/lead-form.png)
+![Lead Form Screenshot](./docs/screenshots/lead-capture-automation.jpeg)
 *Glassmorphic design with real-time validation*
 
 ### Admin Dashboard
-![Dashboard Screenshot](./docs/screenshots/dashboard.png)
+![Dashboard Screenshot](./docs/screenshots/leads-dashboard.jpeg)
 *Real-time lead management with analytics*
-
-### Analytics Cards
-![Analytics Screenshot](./docs/screenshots/analytics.png)
-*Track conversions and daily leads*
 
 ---
 
