@@ -255,9 +255,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Author
 
 **Your Name**
-- LinkedIn: [Your LinkedIn](https://www.linkedin.com/in/ubba-obada)
-- GitHub: [@Obada-barakat](https://github.com/Obada-barakat)
-- Portfolio: [yourwebsite.com](https://ubba-portfolio.vercel.app/)
+- LinkedIn: [Ubba-Obada](https://www.linkedin.com/in/ubba-obada)
+- GitHub: [@Ubba](https://github.com/Obada-barakat)
+- Portfolio: [Ubba | Portfolio](https://ubba-portfolio.vercel.app/)
 
 ---
 
