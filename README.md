@@ -125,7 +125,7 @@ See [dashboard/README.md](./dashboard/README.md) for configuration.
 ## 🎨 Screenshots
 
 ### Lead Capture Form
-![Lead Form Screenshot](./docs/screenshots/lead-capture-automation.jpeg)
+![Lead Form Screenshot](./docs/screenshots/leads-form.jpeg)
 *Glassmorphic design with real-time validation*
 
 ### Admin Dashboard
