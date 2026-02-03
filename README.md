@@ -255,9 +255,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Author
 
 **Your Name**
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Portfolio: [yourwebsite.com](https://yourwebsite.com)
+- LinkedIn: [Your LinkedIn](https://www.linkedin.com/in/ubba-obada)
+- GitHub: [@Obada-barakat](https://github.com/Obada-barakat)
+- Portfolio: [yourwebsite.com](https://ubba-portfolio.vercel.app/)
 
 ---
 
@@ -276,7 +276,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you have any questions or need help, feel free to:
 - Open an issue
 - Contact me on LinkedIn
-- Email: your.email@example.com
+- Email: obada.baracat1@gmail.com
 
 ---
 
