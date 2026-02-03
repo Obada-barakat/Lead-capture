@@ -19,9 +19,9 @@ Perfect for freelancers, small businesses, or anyone needing a simple CRM soluti
 
 
 ## Live Demos
-(Dashboard)[https://lead-capture-19iq.vercel.app/]
+[Dashboard](https://lead-capture-19iq.vercel.app/)
 
-(leads-form)[https://lead-capture-pi.vercel.app/]
+[Leads-form](https://lead-capture-pi.vercel.app/)
 
 ---
 
