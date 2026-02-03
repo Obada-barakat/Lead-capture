@@ -24,17 +24,28 @@ npm install
 
 ### Configure Environment
 
-Create `.env` file:
-```env
-VITE_N8N_WEBHOOK_URL=http://localhost:5678/webhook/lead-capture
+## 🔧 Configuration
+
+### Update Webhook URL
+
+**File:** `src/components/LeadCaptureForm.jsx`
+
+Find this line (around line 55):
+```javascript
+const response = await fetch('http://localhost:5678/webhook/lead-capture', {
 ```
 
-### Run Development Server
-```bash
-npm run dev
+Replace with your n8n webhook URL:
+```javascript
+const response = await fetch('https://your-n8n-instance.com/webhook/lead-capture', {
 ```
 
-Open `http://localhost:5173`
+### For Production
+
+When deploying, update to your production n8n URL:
+- Development: `http://localhost:5678/webhook/lead-capture`
+- Production: `https://n8n.yourdomain.com/webhook/lead-capture`
+
 
 ## 🔧 Configuration
 
