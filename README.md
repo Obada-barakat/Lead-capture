@@ -7,10 +7,6 @@ A full-stack lead capture and management platform with automated follow-ups, bui
 ![TanStack Query](https://img.shields.io/badge/TanStack_Query-5.0-ff4154.svg)
 ![n8n](https://img.shields.io/badge/n8n-automation-ea4b71.svg)
 
-##Live Demos
-(Dashboard)[https://lead-capture-19iq.vercel.app/]
-(leads-form)[https://lead-capture-pi.vercel.app/]
-
 ## 🎯 Overview
 
 This project demonstrates a complete lead management workflow:
@@ -20,6 +16,12 @@ This project demonstrates a complete lead management workflow:
 - **Password-protected** interface with authentication
 
 Perfect for freelancers, small businesses, or anyone needing a simple CRM solution.
+
+
+## Live Demos
+(Dashboard)[https://lead-capture-19iq.vercel.app/]
+
+(leads-form)[https://lead-capture-pi.vercel.app/]
 
 ---
 
