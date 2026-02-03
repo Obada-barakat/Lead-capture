@@ -1,0 +1,111 @@
+{
+  "name": "Get Leads API",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "get-leads",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "da8b15c6-2572-49cd-9991-c7a17e483b7e",
+      "name": "Webhook",
+      "webhookId": "2d09af5f-e257-46cb-8c3a-3348c5c1ed6b"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1wNlT9hPTCtUqf7NHnBIasHBEr8_xnF-FrG2i45tmatg",
+          "mode": "list",
+          "cachedResultName": "Lead-capture-sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wNlT9hPTCtUqf7NHnBIasHBEr8_xnF-FrG2i45tmatg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wNlT9hPTCtUqf7NHnBIasHBEr8_xnF-FrG2i45tmatg/edit#gid=0"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "eaffd262-0827-4a4e-aa3f-68ae46216487",
+      "name": "Get row(s) in sheet",
+      "retryOnFail": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "399LjBsQEawjKMqR",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format the data from Google Sheets\nconst leads = items.map(item => {\n  const data = item.json;\n  return {\n    name: data.name || '',\n    email: data.email || '',\n    phone: data.phone || '',\n    company: data.company || '',\n    message: data.message || '',\n    timestamp: data.timestamp || '',\n    source: data.source || '',\n    status: data.status || 'new'\n  };\n});\n\n// Return formatted data\nreturn [{ json: { leads } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        464,
+        -80
+      ],
+      "id": "37c33460-e619-4e05-97d4-748ef69a72a5",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "fb08758e-d714-4509-a94b-f41669d2cdb2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2ceed65da0c3914208ea731832f33b0a7b8b0ff9381e410157f5ae297f2cb9ab"
+  },
+  "id": "XLqTVGMOjygbkNcm1Dejv",
+  "tags": []
+}
