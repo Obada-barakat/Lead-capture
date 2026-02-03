@@ -25,12 +25,6 @@ npm install
 
 ### Configure Environment
 
-Create `.env` file:
-```env
-VITE_ADMIN_PASSWORD=your_secure_password
-VITE_GET_LEADS_URL=http://localhost:5678/webhook/get-leads
-VITE_UPDATE_STATUS_URL=http://localhost:5678/webhook/update-lead-status
-```
 
 ### Run Development Server
 ```bash
