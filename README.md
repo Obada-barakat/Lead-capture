@@ -69,7 +69,7 @@ lead-management-system/
 ├── lead-form/              # Public-facing lead capture form
 ├── dashboard/              # Admin dashboard for lead management
 ├── n8n-workflows/          # Exportable n8n workflow JSONs
-├── docs/                   # Additional documentation
+├── docs/                   # Documentation and screenshots
 └── README.md               # This file
 ```
 
@@ -99,6 +99,12 @@ npm run dev
 
 Open `http://localhost:5173` to see the form.
 
+**Configure webhook URL:**
+Edit `src/components/LeadCaptureForm.jsx` line 55 and replace with your n8n URL:
+```javascript
+const response = await fetch('http://localhost:5678/webhook/lead-capture', {
+```
+
 See [lead-form/README.md](./lead-form/README.md) for detailed setup.
 
 ### 3. Set Up n8n Workflows
@@ -116,9 +122,19 @@ npm install
 npm run dev
 ```
 
-Default password: `Admin@0022` (change this!)
+**Configure API endpoints and password:**
 
-See [dashboard/README.md](./dashboard/README.md) for configuration.
+Edit `src/context/AuthContext.jsx` line 5:
+```javascript
+const ADMIN_PASSWORD = 'admin123'; // Change this!
+```
+
+Edit `src/services/api.js` line 2:
+```javascript
+const API_BASE_URL = 'http://localhost:5678/webhook';
+```
+
+See [dashboard/README.md](./dashboard/README.md) for detailed configuration.
 
 ---
 
@@ -137,35 +153,40 @@ See [dashboard/README.md](./dashboard/README.md) for configuration.
 ## 🔧 Configuration
 
 ### Lead Form
-Update the webhook URL in `lead-form/src/components/LeadCaptureForm.jsx`:
+
+**File:** `lead-form/src/components/LeadCaptureForm.jsx`
+
+Update webhook URL (around line 55):
 ```javascript
-const response = await fetch('http://localhost:5678/webhook/lead-capture', {
+const response = await fetch('YOUR_N8N_URL/webhook/lead-capture', {
   method: 'POST',
-  // ...
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ ...formData, timestamp: new Date().toISOString() })
 });
 ```
 
-Change `http://localhost:5678` to your n8n instance URL.
-
 ### Dashboard
 
-Update API endpoints in `dashboard/src/services/api.js`:
+**File:** `dashboard/src/context/AuthContext.jsx`
+
+Change admin password (line 5):
 ```javascript
-const API_BASE_URL = 'http://localhost:5678/webhook';
+const ADMIN_PASSWORD = 'your_secure_password'; // Change this!
 ```
 
-Change password in `dashboard/src/context/AuthContext.jsx`:
+**File:** `dashboard/src/services/api.js`
+
+Update API base URL (line 2):
 ```javascript
-const ADMIN_PASSWORD = 'Admin@0022'; // Change this!
+const API_BASE_URL = 'YOUR_N8N_URL/webhook';
 ```
 
-⚠️ **Security Note:** For production, use environment variables and proper authentication.
+### n8n Workflows
 
-
-**n8n**
-- Google Sheets API credentials
-- Resend API key
-- Webhook URLs
+- Configure Google Sheets credentials
+- Set up Resend API key
+- Update email templates
+- Activate all workflows
 
 ---
 
@@ -206,43 +227,110 @@ const ADMIN_PASSWORD = 'Admin@0022'; // Change this!
 
 ## 🚢 Deployment
 
-### Lead Form
-Deploy to **Vercel** or **Netlify**:
+### Before Deploying
+
+**⚠️ Important: Update these files for production:**
+
+1. **Lead Form** - Update n8n URL in `LeadCaptureForm.jsx`
+2. **Dashboard** - Update password in `AuthContext.jsx`
+3. **Dashboard** - Update API URL in `api.js`
+
+### Deploy Lead Form
+
+**Vercel:**
 ```bash
 cd lead-form
 npm run build
-# Follow Vercel/Netlify deployment steps
+npx vercel --prod
 ```
 
-### Dashboard
-Deploy to **Vercel** (with password protection):
+**Netlify:**
+```bash
+cd lead-form
+npm run build
+npx netlify deploy --prod --dir=dist
+```
+
+### Deploy Dashboard
+
+**Vercel:**
 ```bash
 cd dashboard
 npm run build
-# Deploy and set VITE_ADMIN_PASSWORD in environment variables
+npx vercel --prod
 ```
 
-### n8n
+**Netlify:**
+```bash
+cd dashboard
+npm run build
+npx netlify deploy --prod --dir=dist
+```
+
+### Deploy n8n
+
 - **Self-hosted**: Docker or npm installation
 - **Cloud**: n8n.cloud (paid)
-
-See [docs/deployment.md](./docs/deployment.md) for detailed guides.
 
 ---
 
 ## 🔐 Security Notes
 
 **Current Setup:**
-- ✅ Good for demos and internal tools
+- ✅ Good for demos and portfolio projects
 - ✅ Session-based authentication
-- ✅ Password protection on dashboard
+- ✅ Simple password protection
 
-**For Production:**
-- Consider proper authentication (Firebase, Auth0, Supabase)
+**For Production, Consider:**
+- Use environment variables for sensitive data
+- Implement proper authentication (Firebase, Auth0, Supabase)
 - Use HTTPS for all endpoints
-- Implement rate limiting
-- Store passwords securely (environment variables)
-- Add CORS configuration
+- Add rate limiting
+- Hash passwords securely
+- Implement CORS properly
+
+**Quick Security Improvement:**
+
+For production, use environment variables instead of hardcoded values:
+```javascript
+// Example: Using environment variables (Vite)
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5678';
+const PASSWORD = import.meta.env.VITE_PASSWORD || 'admin123';
+```
+
+---
+
+## 🧪 Testing
+
+### Test Lead Form
+1. Fill out the form with valid data
+2. Submit and check for success message
+3. Verify email received
+4. Check Google Sheets for new entry
+
+### Test Dashboard
+1. Visit dashboard and login
+2. Verify leads display from Google Sheets
+3. Test search functionality
+4. Test status filter
+5. Update a lead status
+6. Refresh and verify changes persist
+
+### Test n8n Workflows
+```bash
+# Test lead capture
+curl -X POST http://localhost:5678/webhook/lead-capture \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Test","email":"test@example.com","phone":"1234567890"}'
+
+# Test get leads
+curl http://localhost:5678/webhook/get-leads
+
+# Test update status
+curl -X POST http://localhost:5678/webhook/update-lead-status \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","status":"contacted"}'
+```
 
 ---
 
@@ -267,9 +355,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Author
 
 **Your Name**
-- LinkedIn: [Ubba-Obada](https://www.linkedin.com/in/ubba-obada)
+- LinkedIn: [Your LinkedIn](https://www.linkedin.com/in/ubba-obada)
 - GitHub: [@Ubba](https://github.com/Obada-barakat)
-- Portfolio: [Ubba | Portfolio](https://ubba-portfolio.vercel.app/)
+- Portfolio: [Ubba | portfolio](https://ubba-portfolio.vercel.app/)
 
 ---
 
@@ -280,13 +368,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [n8n](https://n8n.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Lucide Icons](https://lucide.dev/)
+- [Resend](https://resend.com/)
 
 ---
 
 ## 📧 Support
 
-If you have any questions or need help, feel free to:
-- Open an issue
+If you have any questions or need help:
+- Open an issue on GitHub
 - Contact me on LinkedIn
 - Email: obada.baracat1@gmail.com
 
