@@ -136,19 +136,31 @@ See [dashboard/README.md](./dashboard/README.md) for configuration.
 
 ## 🔧 Configuration
 
-### Environment Variables
-
-**Lead Form** (`.env`)
-```env
-VITE_N8N_WEBHOOK_URL=http://your-n8n-instance:5678/webhook/lead-capture
+### Lead Form
+Update the webhook URL in `lead-form/src/components/LeadCaptureForm.jsx`:
+```javascript
+const response = await fetch('http://localhost:5678/webhook/lead-capture', {
+  method: 'POST',
+  // ...
+});
 ```
 
-**Dashboard** (`.env`)
-```env
-VITE_ADMIN_PASSWORD=your_secure_password
-VITE_GET_LEADS_URL=http://your-n8n-instance:5678/webhook/get-leads
-VITE_UPDATE_STATUS_URL=http://your-n8n-instance:5678/webhook/update-lead-status
+Change `http://localhost:5678` to your n8n instance URL.
+
+### Dashboard
+
+Update API endpoints in `dashboard/src/services/api.js`:
+```javascript
+const API_BASE_URL = 'http://localhost:5678/webhook';
 ```
+
+Change password in `dashboard/src/context/AuthContext.jsx`:
+```javascript
+const ADMIN_PASSWORD = 'Admin@0022'; // Change this!
+```
+
+⚠️ **Security Note:** For production, use environment variables and proper authentication.
+
 
 **n8n**
 - Google Sheets API credentials
